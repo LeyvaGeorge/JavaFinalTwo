@@ -38,7 +38,7 @@ public class Book {
     public void setNumberOfPages(int numberOfPages) {this.numberOfPages = numberOfPages;}
 
     // Prints the book information
-    public void PrintBookInfo() {
+    public void printBookInfo() {
         System.out.println("ID: " + ID);
         System.out.println("Title: " + title);
         System.out.println("Author: " + author);
