@@ -96,6 +96,16 @@ public class Main {
     public static void main(String[] args) {
         Scanner scnr = new Scanner(System.in);
         Inventory library = new Inventory();
+        library.addBook(1, "The Great Gatsby", "F. Scott Fitzgerald", 3273565, 180);
+        library.addBook(2, "To Kill a Mockingbird", "Harper Lee", 978006093, 281);
+        library.addBook(3, "1984", "George Orwell", 978045152, 328);
+        library.addBook(4, "Pride and Prejudice", "Jane Austen", 978014143, 279);
+        library.addBook(5, "The Catcher in the Rye", "J.D. Salinger", 978031676, 214);
+        library.addBook(6, "The Hobbit", "J.R.R. Tolkien", 978054792, 310);
+        library.addBook(7, "Harry Potter and the Philosopher's Stone", "J.K. Rowling", 97804397, 309);
+        library.addBook(8, "The Lord of the Rings", "J.R.R. Tolkien", 978054400, 1178);
+        library.addBook(9, "The Chronicles of Narnia", "C.S. Lewis", 978006623, 767);
+        library.addBook(10,"Alice's Adventures in Wonderland", "Lewis Carroll", 978048627, 200);
         System.out.println("Welcome to the Library Inventory System!");
         int choice = 0;
         while (choice != 6) {
@@ -106,6 +116,7 @@ public class Main {
             System.out.println("4. Print all books in inventory");
             System.out.println("5. Search for a book by title");
             System.out.println("6. Exit");
+            System.out.print("\nEnter your choice: ");
             choice = scnr.nextInt();
             scnr.nextLine(); // Consume the newline character
 
@@ -119,20 +130,40 @@ public class Main {
                     library.addBook(ID, title, author, ISBN, numberOfPages);
                     break;
                 case 2:
+                    //Check if file is empty
+                    if (library.inventoryIsEmpty()) {
+                        System.out.println("No books available in inventory to borrow.");
+                        break;
+                    }
                     System.out.print("Enter the ID of the book you want to borrow: ");
                     int borrowID = scnr.nextInt();
                     scnr.nextLine(); // Consume the newline character
                     library.borrowBook(borrowID);
                     break;
                 case 3:
+                    //Check if file is empty
+                    if (library.lendingIsEmpty()) {
+                        System.out.println("No books currently borrowed to return.");
+                        break;
+                    }
                     System.out.print("Enter the ID of the book you want to return: ");
                     int returnID = scnr.nextInt();
                     library.returnBook(returnID);
                     break;
                 case 4:
+                    //Check if file is empty
+                    if (library.inventoryIsEmpty()) {
+                        System.out.println("No books available in inventory.");
+                        break;
+                    }
                     library.printAll();
                     break;
                 case 5:
+                    //Check if file is empty
+                    if (library.inventoryIsEmpty()) {
+                        System.out.println("No books available in inventory to search.");
+                        break;
+                    }
                     System.out.print("Enter the title to search for: ");
                     String searchTitle = scnr.nextLine();
                     library.searchByTitle(searchTitle);

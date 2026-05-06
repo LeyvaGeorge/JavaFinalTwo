@@ -25,7 +25,7 @@ public class Inventory {
             if (textBook.getID() == bookID) {
                 lending.add(textBook);
                 inventory.remove(textBook);
-                System.out.println("You have borrowed: " + textBook.getTitle());
+                System.out.println("Book: " + textBook.getTitle() + " - Successfully borrowed.");
                 return; // Exit the method after borrowing the book
             }
         }
@@ -40,7 +40,7 @@ public class Inventory {
             if (textBook.getID() == bookID) {
                 inventory.add(textBook);
                 lending.remove(textBook);
-                System.out.println("You have returned: " + textBook.getTitle());
+                System.out.println("Book: " + textBook.getTitle() + " - Successfully returned.");
                 return; // Exit the method after returning the book
             }
         }
@@ -51,15 +51,18 @@ public class Inventory {
     // This will print all the books in the inventory
     public void printAll() {
         for (Book textBook : inventory) {
+            System.out.println();
             textBook.printBookInfo();
         }
     }
     
     // this will iterate through the inventory and return all books that partial match the title
     public void searchByTitle(String title) {
+        title = title.toLowerCase(); // Convert search title to lowercase for case-insensitive comparison
         boolean found = false;  // Flag to check if any book is found
         for (Book textBook : inventory) {
-            if (textBook.getTitle().contains(title)) {
+            // Get the book title, convert it to lowercase, and check if it contains the search title
+            if (textBook.getTitle().toLowerCase().contains(title)) {
                 textBook.printBookInfo();
                 found = true;  // Set flag to true if a book is found
             }
@@ -67,5 +70,13 @@ public class Inventory {
         if (!found) {
             System.out.println("No books found with the title containing: " + title);
         }
+        return; // Exit the method after searching for the book
+    }
+
+    public boolean inventoryIsEmpty() {
+        return inventory.isEmpty();
+    }
+    public boolean lendingIsEmpty() {
+        return lending.isEmpty();
     }
 }
